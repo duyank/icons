@@ -1,43 +1,41 @@
 {
-  "name": "icons",
-  "version": "0.1.0",
+  "name": "@duyank/icons",
+  "version": "0.0.12",
   "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.38",
+  "files": [
+    "build"
+  ],
+  "devDependencies": {
+    "@babel/cli": "^7.20.7",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-proposal-decorators": "^7.22.7",
+    "@babel/plugin-proposal-object-rest-spread": "^7.20.7",
+    "@babel/plugin-proposal-private-methods": "^7.18.6",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@babel/plugin-transform-react-constant-elements": "^7.22.5",
+    "@babel/plugin-transform-runtime": "^7.22.7",
+    "@babel/preset-env": "^7.22.7",
+    "@babel/preset-react": "^7.22.5",
+    "@babel/preset-typescript": "^7.22.5",
+    "@svgr/cli": "^6.2.1",
+    "@svgr/rollup": "^6.2.1",
     "@types/react": "^18.2.14",
-    "@types/react-dom": "^18.2.6",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "copy-dir-cli": "^0.0.3",
+    "cp-cli": "^2.0.0",
+    "esbuild": "^0.18.11",
+    "move-cli": "^2.0.0",
+    "move-file-cli": "^3.0.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
+    "rimraf": "^5.0.1",
+    "typescript": "^5.1.6"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "build": "npm run build:svg && npm run build:es && npm run build:types",
+    "build:svg": "npx @svgr/cli svg --template svgr-template.js --no-index",
+    "build:es": "babel icons --extensions \".ts,.tsx\" --out-dir ./build --ignore node_modules,scripts,build",
+    "build:types": "tsc --emitDeclarationOnly --declaration --declarationDir build",
+    "prepare": "node scripts/prepare.js",
+    "release": "npm run prepare && cd build && npm publish --access public"
   }
 }

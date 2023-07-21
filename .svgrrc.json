@@ -1,0 +1,7 @@
+{
+  "icon": true,
+  "typescript": true,
+  "outDir": "icons",
+  "index": false,
+  "ignoreExisting": true
+}
